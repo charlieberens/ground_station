@@ -1,7 +1,6 @@
-# Create a web socket server that sends "ok" every second
-# It should be on port 5001
-
-# Path: websocket.py
+"""
+Reads serial data from a serial port and sends it to a websocket server, optionally prints
+"""
 
 import asyncio
 import websockets
@@ -210,7 +209,7 @@ def main():
     asyncio.get_event_loop().run_until_complete(start_server)
     loop = asyncio.get_event_loop()
     loop.create_task(serial_loop(ser, queues, args))
-    loop.create_task(print_loop(print_queue))
+    # loop.create_task(print_loop(print_queue))
     loop.run_forever()
 
 
