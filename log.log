@@ -1,0 +1,202 @@
+[140]	(LOOP)	longLoops=56325	recentLoops=100	recentMicros=474148
+[139]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[140]	(LOOP)	longLoops=56325	recentLoops=100	recentMicros=474148
+[149]	(ALT)	pressure=999.83	temp=26.99
+[150]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[151]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[152]	(LOOP)	longLoops=56466	recentLoops=100	recentMicros=474091
+[153]	(ALT)	pressure=999.77	temp=26.99
+[154]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[155]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[156]	(LOOP)	longLoops=56513	recentLoops=100	recentMicros=474146
+[157]	(ALT)	pressure=999.78	temp=27.01
+[158]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[159]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[160]	(LOOP)	longLoops=56560	recentLoops=100	recentMicros=474051
+[161]	(ALT)	pressure=999.84	temp=27.01
+[162]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[163]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[165]	(ALT)	pressure=999.83	temp=27.01
+[166]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[167]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[168]	(LOOP)	longLoops=56654	recentLoops=100	recentMicros=474125
+[169]	(ALT)	pressure=999.83	temp=27.01
+[170]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[171]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[172]	(LOOP)	longLoops=56701	recentLoops=100	recentMicros=474150
+[173]	(ALT)	pressure=999.85	temp=27.01
+[174]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[175]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[176]	(LOOP)	longLoops=56748	recentLoops=100	recentMicros=474121
+[177]	(ALT)	pressure=999.83	temp=27.01
+[178]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[179]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[180]	(LOOP)	longLoops=56795	recentLoops=100	recentMicros=474095
+[181]	(ALT)	pressure=999.87	temp=27.00
+[182]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[183]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[184]	(LOOP)	longLoops=56842	recentLoops=100	recentMicros=474049
+[185]	(ALT)	pressure=999.83	temp=27.02
+[186]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[187]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[188]	(LOOP)	longLoops=56889	recentLoops=100	recentMicros=474145
+[189]	(ALT)	pressure=999.81	temp=27.00
+[190]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[191]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[192]	(LOOP)	longLoops=56936	recentLoops=100	recentMicros=474104
+[193]	(ALT)	pressure=999.84	temp=26.99
+[194]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[195]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[196]	(LOOP)	longLoops=56983	recentLoops=100	recentMicros=474051
+[197]	(ALT)	pressure=999.84	temp=27.01
+[198]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[199]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[200]	(LOOP)	longLoops=57030	recentLoops=100	recentMicros=474213
+[201]	(ALT)	pressure=999.82	temp=27.02
+[202]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[203]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[204]	(LOOP)	longLoops=57077	recentLoops=100	recentMicros=474082
+[205]	(ALT)	pressure=999.83	temp=27.00
+[206]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[207]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[208]	(LOOP)	longLoops=57124	recentLoops=100	recentMicros=474108
+[209]	(ALT)	pressure=999.82	temp=27.01
+[210]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[211]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[212]	(LOOP)	longLoops=57171	recentLoops=100	recentMicros=474122
+[213]	(ALT)	pressure=999.84	temp=27.01
+[214]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[215]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[216]	(LOOP)	longLoops=57218	recentLoops=100	recentMicros=474100
+[217]	(ALT)	pressure=999.86	temp=27.00
+[218]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[219]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[220]	(LOOP)	longLoops=57265	recentLoops=100	recentMicros=474094
+[221]	(ALT)	pressure=999.85	temp=26.99
+[222]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[223]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[224]	(LOOP)	longLoops=57312	recentLoops=100	recentMicros=474149
+[225]	(ALT)	pressure=999.85	temp=26.99
+[226]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[227]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[228]	(LOOP)	longLoops=57359	recentLoops=100	recentMicros=474125
+[229]	(ALT)	pressure=999.88	temp=27.00
+[230]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[231]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[232]	(LOOP)	longLoops=57406	recentLoops=100	recentMicros=474107
+[233]	(ALT)	pressure=999.88	temp=26.99
+[234]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[235]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[236]	(LOOP)	longLoops=57453	recentLoops=100	recentMicros=474068
+[237]	(ALT)	pressure=999.86	temp=27.01
+[238]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[239]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[240]	(LOOP)	longLoops=57500	recentLoops=100	recentMicros=474126
+[241]	(ALT)	pressure=999.86	temp=27.00
+[242]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[243]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[244]	(LOOP)	longLoops=57547	recentLoops=100	recentMicros=474145
+[245]	(ALT)	pressure=999.88	temp=27.01
+[246]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[247]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[248]	(LOOP)	longLoops=57594	recentLoops=100	recentMicros=474175
+[249]	(ALT)	pressure=999.86	temp=26.99
+[250]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[251]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[252]	(LOOP)	longLoops=57641	recentLoops=100	recentMicros=474135
+[253]	(ALT)	pressure=999.81	temp=27.01
+[254]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[255]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[0]	(LOOP)	longLoops=57688	recentLoops=100	recentMicros=474103
+[1]	(ALT)	pressure=999.85	temp=27.01
+[2]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[3]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[4]	(LOOP)	longLoops=57735	recentLoops=100	recentMicros=474097
+[5]	(ALT)	pressure=999.84	temp=27.01
+[6]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[7]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[8]	(LOOP)	longLoops=57782	recentLoops=100	recentMicros=474130
+[9]	(ALT)	pressure=999.85	temp=27.02
+[10]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[11]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[12]	(LOOP)	longLoops=57829	recentLoops=100	recentMicros=474086
+[13]	(ALT)	pressure=999.86	temp=27.01
+[14]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[15]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[16]	(LOOP)	longLoops=57876	recentLoops=100	recentMicros=474123
+[17]	(ALT)	pressure=999.85	temp=27.02
+[18]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[19]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[20]	(LOOP)	longLoops=57923	recentLoops=100	recentMicros=474143
+[21]	(ALT)	pressure=999.86	temp=27.02
+[22]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[23]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[24]	(LOOP)	longLoops=57970	recentLoops=100	recentMicros=474315
+[25]	(ALT)	pressure=999.80	temp=27.01
+[26]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[27]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[28]	(LOOP)	longLoops=58017	recentLoops=100	recentMicros=474033
+[29]	(ALT)	pressure=999.86	temp=27.01
+[30]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[31]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[32]	(LOOP)	longLoops=58064	recentLoops=100	recentMicros=474064
+[33]	(ALT)	pressure=999.85	temp=27.02
+[34]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[35]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[36]	(LOOP)	longLoops=58111	recentLoops=100	recentMicros=474109
+[37]	(ALT)	pressure=999.86	temp=27.03
+[38]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[39]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[40]	(LOOP)	longLoops=58158	recentLoops=100	recentMicros=474073
+[41]	(ALT)	pressure=999.82	temp=27.04
+[42]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[43]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[44]	(LOOP)	longLoops=58205	recentLoops=100	recentMicros=474041
+[45]	(ALT)	pressure=999.81	temp=27.03
+[46]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[47]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[48]	(LOOP)	longLoops=58252	recentLoops=100	recentMicros=474043
+[49]	(ALT)	pressure=999.85	temp=27.04
+[50]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[51]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[52]	(LOOP)	longLoops=58299	recentLoops=100	recentMicros=474227
+[53]	(ALT)	pressure=999.85	temp=27.04
+[54]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[55]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[56]	(LOOP)	longLoops=58346	recentLoops=100	recentMicros=474120
+[57]	(ALT)	pressure=999.88	temp=27.05
+[58]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[59]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[60]	(LOOP)	longLoops=58393	recentLoops=100	recentMicros=474093
+[61]	(ALT)	pressure=999.82	temp=27.05
+[62]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[63]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[64]	(LOOP)	longLoops=58440	recentLoops=100	recentMicros=474301
+[65]	(ALT)	pressure=999.81	temp=27.05
+[66]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[67]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[68]	(LOOP)	longLoops=58487	recentLoops=100	recentMicros=474158
+[69]	(ALT)	pressure=999.84	temp=27.05
+[70]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[71]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[72]	(LOOP)	longLoops=58534	recentLoops=100	recentMicros=474049
+[73]	(ALT)	pressure=999.84	temp=27.04
+[74]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[75]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[76]	(LOOP)	longLoops=58581	recentLoops=100	recentMicros=474298
+[77]	(ALT)	pressure=999.85	temp=27.02
+[78]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[79]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[80]	(LOOP)	longLoops=58628	recentLoops=100	recentMicros=474069
+[81]	(ALT)	pressure=999.80	temp=27.06
+[82]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[84]	(LOOP)	longLoops=58675	recentLoops=100	recentMicros=474088
+[85]	(ALT)	pressure=999.82	temp=27.06
+[86]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[87]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[88]	(LOOP)	longLoops=58722	recentLoops=100	recentMicros=474117
+[89]	(ALT)	pressure=999.84	temp=27.07
+[90]	(GPS)	fix=0	qual=0	sats=0	ant=0	datetime=50/24/20T0:0:2	lat=0	long=0	fixLat=0	fixLong=0
+[91]	(IMU)	accelX=2.87	accelY=-0.30	accelZ=4.52
+[92]	(LOOP)	longLoops=58769	recentLoops=100	recentMicros=474102
+[93]	(ALT)	pressure=999.86	temp=27.03

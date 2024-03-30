@@ -10,18 +10,13 @@ const app = createApp({
         const pointCount = ref(DEFAULT_MAX_DATA_POINTS);
         const sources = ref([
             {
-                title: "Sine Wave",
-                id: "sine",
-                type: "line",
-            },
-            {
                 title: "X Acceleration",
                 id: "accelx",
                 type: "line",
             },
             {
                 title: "Log",
-                id: "LOG",
+                id: "log",
                 type: "log",
             },
         ]);
@@ -46,6 +41,12 @@ const app = createApp({
                     if (gdata.value[source].length > pointCount.value) {
                         gdata.value.shift();
                     }
+                    // gdata.value["log"] = [
+                    //     {
+                    //         time: 0,
+                    //         value: "Monlkely\nGomaom",
+                    //     },
+                    // ];
                 }
                 i++;
             };
@@ -162,7 +163,7 @@ app.component("Log", {
     template: `
         <div :id="'log-' + id" class="log">
             <ul>
-                <li v-for="d in data" :key="d.time"><em class="log-time">{{ d.time.toFixed(2) }}:</em> {{ d.value }}</li>
+                <li v-for="d in data" :key="d.time"><em class="log-time">{{ d.time.toFixed(2) }}:</em> {{d}}</li>
             </ul>
         </div>
     `,

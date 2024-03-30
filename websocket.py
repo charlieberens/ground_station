@@ -60,6 +60,8 @@ async def serial_loop(ser, queues, args):
         while ser.in_waiting:
             try:
                 ser_bytes = ser.read_until(b"@")
+                if len(ser_bytes) == 1:  # Account for case when the first byte is an @
+                    ser_bytes = ser_bytes + ser.read_until(b"@")
                 transmission_number = ser_bytes[0]
                 packet_number = ser_bytes[1]
                 packet_count = ser_bytes[2]
@@ -103,16 +105,21 @@ async def serial_loop(ser, queues, args):
                 transmission_number = current_packet["transmission_number"]
                 time = current_packet["time"]
 
-                log(data, file=args.log, debug=args.debug, overwrite=args.overwrite)
+                payload = {
+                    "transmission_number": transmission_number,
+                    "transmission_type": transimission_type,
+                    "data": data,
+                    "time": time,
+                }
+
+                log(
+                    format_line(payload),
+                    file=args.log,
+                    debug=args.debug,
+                    overwrite=args.overwrite,
+                )
                 for queue in queues:
-                    queue.put(
-                        {
-                            "transmission_number": transmission_number,
-                            "transmission_type": transimission_type,
-                            "data": data,
-                            "time": time,
-                        }
-                    )
+                    queue.put(payload)
             except IndexError:
                 pass
             except Exception as e:
@@ -141,11 +148,13 @@ def extract_imu_data(data, time):
 
 
 TRANSMITABLES = {
-    "LOG": lambda x, t: {
-        "time": t,
-        "value": x,
-        "source": "LOG",
-    },
+    "LOG": lambda x, t: [
+        {
+            "time": t,
+            "value": x,
+            "source": "LOG",
+        }
+    ],
     "IMU": extract_imu_data,
 }
 
