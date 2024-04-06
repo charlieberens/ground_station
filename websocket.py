@@ -26,9 +26,12 @@ def format_line(data):
     return f"[{data['transmission_number']}]\t({data['transmission_type']})\t{data['data']}"
 
 
-def log(line, file="log.log", log_time=100, debug=False, overwrite=True):
+def log(line, file=None, log_time=100, debug=False, overwrite=True):
     if debug:
         print(line)
+    
+    if file is None:
+        file = "log.log"
 
     if file not in logs:
         logs[file] = []
@@ -66,7 +69,7 @@ async def serial_loop(ser, queues, args):
                 packet_number = ser_bytes[1]
                 packet_count = ser_bytes[2]
 
-                data = ser_bytes[3:-1].decode("utf-8")
+                data = ser_bytes[3:-1].decode("utf-8", "replace")
                 if packet_number == 0:
                     transimission_type = data.split(" ")[0]
                     data = " ".join(data.split(" ")[1:])
@@ -142,7 +145,10 @@ def extract_generic_data(data, time):
 
     for section in sections:
         name, value = section.split("=")
-        output.append({"source": name, "time": time, "value": float(value)})
+        if name == "datetime":
+            output.append({"source": name, "time": time, "value": value})
+        else:
+            output.append({"source": name, "time": time, "value": float(value)})
 
     return output
 
@@ -154,7 +160,7 @@ def extract_altitude_data(data, time):
     temp = float(data.split("\t")[1].split("=")[1])
     pressure = float(data.split("\t")[0].split("=")[1])
 
-    altitude = 44330 * (1 - (pressure / PRESSURE_AT_SEA_LEVEL) ** (1 / 5.255))
+    altitude = 145366.45 * (1.0 - pow(pressure / 1013.25, 0.190284));
 
     return [
         {"source": "TEMP", "time": time, "value": temp},
