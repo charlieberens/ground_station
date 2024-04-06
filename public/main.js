@@ -19,6 +19,11 @@ const app = createApp({
                 id: "log",
                 type: "log",
             },
+            {
+                title: "Altitude (ft)",
+                id: "altitude",
+                type: "line",
+            },
         ]);
         let i = 0;
 
@@ -28,12 +33,30 @@ const app = createApp({
                 console.log("Websocket connected");
                 ws.send("Hello from client");
             };
+            gdata.value["gps"] = {
+                fix: false,
+                satelites: 0,
+                mostRecent: {
+                    lat: "0",
+                    lon: "0",
+                },
+            };
             ws.onmessage = (event) => {
                 dataArray = JSON.parse(event.data);
 
                 for (let data of dataArray) {
                     let { time, source, value } = data;
                     source = source.toLowerCase();
+
+                    if (source == "fix") {
+                        gdata.value["gps"].fix = value;
+                        continue;
+                    }
+                    if (source == "satelites") {
+                        gdata.value["gps"].satelites = value;
+                        continue;
+                    }
+
                     if (!gdata.value[source]) {
                         gdata.value[source] = [];
                     }
@@ -41,12 +64,6 @@ const app = createApp({
                     if (gdata.value[source].length > pointCount.value) {
                         gdata.value.shift();
                     }
-                    // gdata.value["log"] = [
-                    //     {
-                    //         time: 0,
-                    //         value: "Monlkely\nGomaom",
-                    //     },
-                    // ];
                 }
                 i++;
             };
@@ -147,6 +164,25 @@ app.component("Chart", {
     },
 });
 
+app.component("gps", {
+    props: {
+        data: Object,
+    },
+    setup(props) {
+        const { data } = toRefs(props);
+
+        return {
+            data,
+        };
+    },
+    template: `
+        <div class="gps">
+            <span :class="{'satelite-fix-indicator': true, 'fix': data.fix}"></span>
+            <span class="satelite-count">{{data.satelites}} Satelites</span>
+            <span class="lat-lon">{{data.mostRecent['lat']}} {{data.mostRecent['lon']}}</span>
+        </div>`,
+});
+
 app.component("Log", {
     props: {
         id: String,
@@ -154,6 +190,11 @@ app.component("Log", {
     },
     setup(props) {
         const { id, data } = toRefs(props);
+
+        watch(data, () => {
+            const log = document.getElementById(`log-${id}`);
+            log.scrollTop = log.scrollHeight;
+        });
 
         return {
             id,
@@ -163,7 +204,7 @@ app.component("Log", {
     template: `
         <div :id="'log-' + id" class="log">
             <ul>
-                <li v-for="d in data" :key="d.time"><em class="log-time">{{ d.time.toFixed(2) }}:</em> {{d}}</li>
+                <li v-for="d in data" :key="d.time"><em class="log-time">{{ d.time.toFixed(2) }}:</em><div class="log-entry-cont"><span v-for="d2 in d.value.split('\\n').filter(l => l.length)">{{d2}}</span></div></li>
             </ul>
         </div>
     `,

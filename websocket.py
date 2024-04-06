@@ -135,7 +135,7 @@ async def print_loop(queue):
         await asyncio.sleep(0.01)
 
 
-def extract_imu_data(data, time):
+def extract_generic_data(data, time):
     sections = data.split("\t")
 
     output = []
@@ -147,6 +147,22 @@ def extract_imu_data(data, time):
     return output
 
 
+PRESSURE_AT_SEA_LEVEL = 1013.25
+
+
+def extract_altitude_data(data, time):
+    temp = float(data.split("\t")[1].split("=")[1])
+    pressure = float(data.split("\t")[0].split("=")[1])
+
+    altitude = 44330 * (1 - (pressure / PRESSURE_AT_SEA_LEVEL) ** (1 / 5.255))
+
+    return [
+        {"source": "TEMP", "time": time, "value": temp},
+        {"source": "PRESSURE", "time": time, "value": pressure},
+        {"source": "ALTITUDE", "time": time, "value": altitude},
+    ]
+
+
 TRANSMITABLES = {
     "LOG": lambda x, t: [
         {
@@ -155,14 +171,20 @@ TRANSMITABLES = {
             "source": "LOG",
         }
     ],
-    "IMU": extract_imu_data,
+    "IMU": extract_generic_data,
+    "ALT": extract_altitude_data,
+    "GPS": extract_generic_data,
 }
 
 
 def process_websocket_data(data):
     if data["transmission_type"] not in TRANSMITABLES:
         return []
-    return TRANSMITABLES[data["transmission_type"]](data["data"], data["time"])
+    try:
+        return TRANSMITABLES[data["transmission_type"]](data["data"], data["time"])
+    except Exception as e:
+        print(e)
+        return []
 
 
 async def websocket_loop(websocket, path, queue):

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Payload Telemetry</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -22,12 +22,12 @@
                     type="text"
                     v-model="search"
                 />
-                <input class="point-count" type="number" v-model="pointCount" />
+                <GPS :data="gdata.gps"></GPS>
             </nav>
             <div class="chart-aligner">
                 <Data-Wrapper
                     :source="source"
-                    :data="gdata[source.id]"
+                    :data="gdata[source.id.toLowerCase()]"
                     v-for="source in sources.filter((s) => s.title.toLowerCase().includes(search.toLowerCase()) || s.id.toLowerCase().includes(search.toLowerCase()))"
                 ></Data-Wrapper>
             </div>

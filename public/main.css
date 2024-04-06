@@ -25,6 +25,9 @@ nav {
     justify-content: center;
     padding: 16px;
     gap: 16px;
+    height: 100px;
+    position: relative;
+    align-items: center;
 }
 .chart-aligner {
     display: grid;
@@ -75,8 +78,50 @@ nav {
 }
 .log li {
     list-style: none;
-    display: block;
+    display: flex;
+    gap: 4px;
 }
 .log-time {
     opacity: 0.5;
+}
+.log-entry-cont {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.gps {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    height: calc(100% - 32px);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    min-width: 130px;
+}
+.satelite-fix-indicator {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: red;
+    transition: 0.15s ease background-color;
+}
+.satelite-fix-indicator.fix {
+    background-color: green;
+}
+.satelite-count {
+    font-size: 80%;
+    opacity: 0.5;
+}
+.lat-lon {
+    font-weight: bold;
+    font-size: 80%;
 }
