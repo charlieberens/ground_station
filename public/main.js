@@ -15,6 +15,16 @@ const app = createApp({
                 type: "line",
             },
             {
+                title: "X Gyro",
+                id: "gyrox",
+                type: "line",
+            },
+            {
+                title: "Temperature (F)",
+                id: "temp",
+                type: "line",
+            },
+            {
                 title: "Log",
                 id: "log",
                 type: "log",
@@ -52,9 +62,16 @@ const app = createApp({
                         gdata.value["gps"].fix = value;
                         continue;
                     }
-                    if (source == "satelites") {
+                    if (source == "sats") {
                         gdata.value["gps"].satelites = value;
                         continue;
+                    }
+                    if (source == "fixLat") {
+                        gdata.value["gps"].mostRecent.lat = value;
+                        continue;
+                    }
+                    if (source == "fixLon") {
+                        gdata.value["gps"].mostRecent.lon = value;
                     }
 
                     if (!gdata.value[source]) {
@@ -159,6 +176,11 @@ app.component("Chart", {
             this.chart.options.scales.x.min = this.data[0].time;
             this.chart.options.scales.x.max =
                 this.data[this.data.length - 1].time;
+            max = Math.max(...this.data.map((d) => d.value));
+            min = Math.min(...this.data.map((d) => d.value));
+
+            this.chart.options.scales.y.min = min - 0.1 * (max - min);
+            this.chart.options.scales.y.max = max + 0.1 * (max - min);
             this.chart.update("none");
         },
     },

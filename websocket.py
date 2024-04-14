@@ -29,7 +29,7 @@ def format_line(data):
 def log(line, file=None, log_time=100, debug=False, overwrite=True):
     if debug:
         print(line)
-    
+
     if file is None:
         file = "log.log"
 
@@ -58,6 +58,7 @@ def close_logs():
 async def serial_loop(ser, queues, args):
     current_packet = {}
     previous_time = 0
+    min_time = -1
     i = 0
     while True:
         while ser.in_waiting:
@@ -77,9 +78,14 @@ async def serial_loop(ser, queues, args):
                     transimission_type = None
 
                 if transimission_type == "LOOP":
-                    # previous_time = int(re.search(r"recentMicros=(\d+)", data).group(1))
-                    previous_time = i
-                    i += 1
+                    previous_time = int(
+                        re.search(r"lastLoopStart=(\d+)", data).group(1)
+                    )
+                    if min_time == -1:
+                        min_time = previous_time
+                        print("MINTIME", min_time)
+                    # previous_time = i
+                    # i += 1
 
                 if packet_number == 0:
                     current_packet = {
@@ -88,7 +94,7 @@ async def serial_loop(ser, queues, args):
                         "transimission_type": transimission_type,
                         "data": [data],
                         "packet_number": packet_number,
-                        "time": previous_time,
+                        "time": (previous_time - min_time) / 1000 / 1000,
                     }
                 else:
                     if transmission_number != current_packet["transmission_number"]:
@@ -160,7 +166,8 @@ def extract_altitude_data(data, time):
     temp = float(data.split("\t")[1].split("=")[1])
     pressure = float(data.split("\t")[0].split("=")[1])
 
-    altitude = 145366.45 * (1.0 - pow(pressure / 1013.25, 0.190284));
+    altitude = 145366.45 * (1.0 - pow(pressure / 1013.25, 0.190284))
+    temp = temp * 9 / 5 + 32
 
     return [
         {"source": "TEMP", "time": time, "value": temp},
