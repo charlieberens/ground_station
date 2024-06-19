@@ -11,8 +11,6 @@ import numpy as np
 import re
 from queue import Queue
 
-PORT = 5001
-
 # Individual transmissions consist of:
 # Transmission Number (byte)
 # Packet Number (byte)
@@ -53,6 +51,19 @@ def close_logs():
             f.write("\n".join(logs[file]))
 
     logs = {}
+
+
+async def fake_serial_loop(queues, args):
+    i = 0
+    while True:
+        payload = {
+            "transmission_number": 0,
+            "transmission_type": "GPS",
+            "data": "",
+            "time": i,
+        }
+        for queue in queues:
+            queue.put(payload)
 
 
 async def serial_loop(ser, queues, args):
@@ -159,6 +170,13 @@ def extract_generic_data(data, time):
     return output
 
 
+def extract_gridfin_data(data, time):
+    angle = float(data.split("\t")[0].split("=")[1])
+    return [
+        {"source": "GRIDFIN", "time": time, "value": angle},
+    ]
+
+
 PRESSURE_AT_SEA_LEVEL = 1013.25
 
 
@@ -166,7 +184,7 @@ def extract_altitude_data(data, time):
     temp = float(data.split("\t")[1].split("=")[1])
     pressure = float(data.split("\t")[0].split("=")[1])
 
-    altitude = 145366.45 * (1.0 - pow(pressure / 1013.25, 0.190284))
+    altitude = 145366.45 * (1.0 - pow(pressure / 843.89, 0.190284))
     temp = temp * 9 / 5 + 32
 
     return [
@@ -187,6 +205,7 @@ TRANSMITABLES = {
     "IMU": extract_generic_data,
     "ALT": extract_altitude_data,
     "GPS": extract_generic_data,
+    "GRIDFIN": extract_gridfin_data,
 }
 
 
@@ -219,11 +238,12 @@ def main():
     parser.add_argument("port", help="Serial port")
     parser.add_argument("--log", help="Name of log file w/ extension")
     parser.add_argument("--overwrite", help="Overwrite log file", default=True)
+    parser.add_argument("--web-port", help="Websocket port", default=5001, type=int)
     parser.add_argument(
         "--baudrate", help="Baudrate", default=115200, type=int, required=False
     )
     parser.add_argument(
-        "--test", help="Baudrate", default=False, type=bool, required=False
+        "--test", help="Test Mode", default=False, type=bool, required=False
     )
     parser.add_argument(
         "--debug",
@@ -240,13 +260,18 @@ def main():
 
     queues = [print_queue, websocket_queue]
 
-    print(f"Opening serial port {args.port} at {args.baudrate} baudrate")
-    ser = serial.Serial(args.port, args.baudrate)
+    if args.test:
+        print("Test mode")
+    else:
+        print(
+            f"Opening serial port {args.port} at {args.baudrate} baudrate. Web Port: {args.web_port}"
+        )
+        ser = serial.Serial(args.port, args.baudrate)
 
     start_server = websockets.serve(
         lambda websocket, path: websocket_loop(websocket, path, websocket_queue),
         "localhost",
-        PORT,
+        args.web_port,
     )
 
     # Start both loops and run them concurrently

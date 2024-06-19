@@ -1,9 +1,14 @@
 const { createApp, ref, toRefs, watch, shallowRef } = Vue;
+const { OBJLoader, MTLLoader } = THREE;
 
 const DEFAULT_MAX_DATA_POINTS = 200;
 
 const app = createApp({
     setup() {
+        const tempPort = ref(5000);
+        const port = ref(0);
+        const payloadName = ref("");
+
         const message = ref("Hello vue!");
         const search = ref("");
         const gdata = ref({});
@@ -15,8 +20,28 @@ const app = createApp({
                 type: "line",
             },
             {
+                title: "Y Acceleration",
+                id: "accely",
+                type: "line",
+            },
+            {
+                title: "Z Acceleration",
+                id: "accelz",
+                type: "line",
+            },
+            {
                 title: "X Gyro",
                 id: "gyrox",
+                type: "line",
+            },
+            {
+                title: "Y Gyro",
+                id: "gyroy",
+                type: "line",
+            },
+            {
+                title: "Z Gyro",
+                id: "gyroz",
                 type: "line",
             },
             {
@@ -34,15 +59,22 @@ const app = createApp({
                 id: "altitude",
                 type: "line",
             },
+            {
+                title: "Pressure (ft)",
+                id: "pressure",
+                type: "line",
+            },
+            {
+                title: "Gridfin Angle",
+                id: "gridfin",
+                type: "line",
+            },
         ]);
         let i = 0;
 
-        const startWebsocket = () => {
-            const ws = new WebSocket("ws://localhost:5001");
-            ws.onopen = () => {
-                console.log("Websocket connected");
-                ws.send("Hello from client");
-            };
+        const startWebsocket = (portValue) => {
+            const ws = new WebSocket(`ws://localhost:${portValue}`);
+            ws.onopen = () => {};
             gdata.value["gps"] = {
                 fix: false,
                 satelites: 0,
@@ -58,6 +90,8 @@ const app = createApp({
                     let { time, source, value } = data;
                     source = source.toLowerCase();
 
+                    console.log(data);
+
                     if (source == "fix") {
                         gdata.value["gps"].fix = value;
                         continue;
@@ -66,12 +100,13 @@ const app = createApp({
                         gdata.value["gps"].satelites = value;
                         continue;
                     }
-                    if (source == "fixLat") {
+                    if (source == "fixlat") {
                         gdata.value["gps"].mostRecent.lat = value;
                         continue;
                     }
-                    if (source == "fixLon") {
+                    if (source == "fixlong") {
                         gdata.value["gps"].mostRecent.lon = value;
+                        continue;
                     }
 
                     if (!gdata.value[source]) {
@@ -86,7 +121,18 @@ const app = createApp({
             };
         };
 
-        startWebsocket();
+        watch(port, () => {
+            if (port.value) {
+                try {
+                    startWebsocket(port.value);
+                } catch (e) {
+                    alert(
+                        "Error starting websocket. Make sure the server is running and the port is correct."
+                    );
+                    console.log(e);
+                }
+            }
+        });
 
         return {
             message,
@@ -94,6 +140,8 @@ const app = createApp({
             sources,
             search,
             pointCount,
+            tempPort,
+            port,
         };
     },
 });
@@ -228,6 +276,129 @@ app.component("Log", {
             <ul>
                 <li v-for="d in data" :key="d.time"><em class="log-time">{{ d.time.toFixed(2) }}:</em><div class="log-entry-cont"><span v-for="d2 in d.value.split('\\n').filter(l => l.length)">{{d2}}</span></div></li>
             </ul>
+        </div>
+    `,
+});
+
+app.component("payload-canvas", {
+    props: {
+        data: Object,
+    },
+    setup(props) {
+        const { data } = toRefs(props);
+
+        let camera = null;
+        let container = ref(null);
+        let scene = new THREE.Scene();
+        let mesh = null;
+        let renderer = null;
+        let hermes = null;
+        let hermesGroup = null;
+        let hermesMaterial = null;
+        let light = null;
+        let pointLight = null;
+
+        const initCanvas = () => {
+            camera = new THREE.PerspectiveCamera(
+                75,
+                container.value.clientWidth / container.value.clientHeight,
+                0.1,
+                1000
+            );
+            camera.position.z = 5;
+
+            let geometry = new THREE.BoxGeometry(0.2, 0.72, 0.2);
+            let material = new THREE.MeshNormalMaterial();
+
+            const loadObjectAndAdd = (materials) => {
+                const loader = new OBJLoader();
+                materials.preload();
+                loader.setMaterials(materials);
+                loader.load(
+                    "hermes.obj",
+                    function (object) {
+                        console.log("Wumbus called");
+                        object.scale.set(10, 10, 10);
+                        hermes = object;
+
+                        hermesGroup = new THREE.Group();
+                        hermesGroup.add(hermes);
+                        hermes.position.set(0, -2, 0);
+
+                        scene.add(hermesGroup);
+                    },
+                    function (xhr) {
+                        console.log(
+                            (xhr.loaded / xhr.total) * 100 + "% loaded"
+                        );
+                    },
+                    function (error) {
+                        console.log(error);
+                        console.log("An error happened");
+                    }
+                );
+            };
+
+            // Load the payload model
+            const materialLoader = new MTLLoader();
+            materialLoader.load(
+                "hermes.mtl",
+                function (materials) {
+                    loadObjectAndAdd(materials);
+                },
+                function (xhr) {
+                    console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+                },
+                function (error) {
+                    console.log(error);
+                    console.log("An error happened");
+                }
+            );
+
+            light = new THREE.AmbientLight(0xffffff, 1);
+            // pointLight = new THREE.PointLight(0xffffff, 1);
+            // pointLight.position.set(25, 50, 25);
+            scene.add(light);
+            // scene.add(pointLight);
+
+            mesh = new THREE.Mesh(geometry, material);
+            // scene.add(mesh);
+
+            renderer = new THREE.WebGLRenderer({
+                antialias: true,
+            });
+            renderer.setSize(
+                container.value.clientWidth,
+                container.value.clientHeight
+            );
+            renderer.setClearColor(0xffffff, 1);
+            container.value.appendChild(renderer.domElement);
+        };
+
+        const animate = () => {
+            requestAnimationFrame(animate);
+            // Rotate hermes
+            if (hermesGroup) {
+                // hermes.rotation.y += 0.01;
+                hermesGroup.rotation.x += 0.01;
+                // hermes.rotation.z += 0.01;
+            }
+            renderer.render(scene, camera);
+        };
+
+        return {
+            camera,
+            container,
+            initCanvas,
+            animate,
+        };
+    },
+    mounted() {
+        this.initCanvas();
+        this.animate();
+    },
+    template: `
+        <div class="payload-canvas-container" ref="container">
         </div>
     `,
 });

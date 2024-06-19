@@ -20,6 +20,40 @@ h6 {
     font-weight: 700;
 }
 
+.payload-name {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+}
+.port-selector-cont {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.port-selector {
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.port-selector input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+.port-selector button {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
 nav {
     display: flex;
     justify-content: center;
@@ -124,4 +158,9 @@ nav {
 .lat-lon {
     font-weight: bold;
     font-size: 80%;
+}
+
+.payload-canvas-container {
+    width: 500px;
+    height: 500px;
 }

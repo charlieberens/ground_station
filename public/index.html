@@ -6,10 +6,15 @@
         <title>Payload Telemetry</title>
         <link rel="stylesheet" href="main.css" />
         <script src="chart.js"></script>
+        <!-- Import threejs with object loader -->
+        <script src="https://cdn.jsdelivr.net/npm/three@0.124.0/build/three.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.124.0/examples/js/loaders/OBJLoader.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.124.0/examples/js/loaders/MTLLoader.js"></script>
     </head>
     <body>
         <div id="app">
-            <nav>
+            <nav v-if="port">
+                <h2 class="payload-name">{{payloadName}}</h2>
                 <input
                     class="search"
                     placeholder="Search"
@@ -18,12 +23,32 @@
                 />
                 <GPS :data="gdata.gps"></GPS>
             </nav>
-            <div class="chart-aligner">
+            <form
+                class="port-selector-cont"
+                v-if="!port"
+                @submit.prevent="() => port = tempPort"
+            >
+                <div class="port-selector">
+                    <input
+                        type="text"
+                        placeholder="Port Number"
+                        v-model="tempPort"
+                    />
+                    <input
+                        type="text"
+                        v-model="payloadName"
+                        placeholder="Payload Name"
+                    />
+                    <button>Connect</button>
+                </div>
+            </form>
+            <div class="chart-aligner" v-if="port">
                 <Data-Wrapper
                     :source="source"
                     :data="gdata[source.id.toLowerCase()]"
                     v-for="source in sources.filter((s) => s.title.toLowerCase().includes(search.toLowerCase()) || s.id.toLowerCase().includes(search.toLowerCase()))"
                 ></Data-Wrapper>
+                <payload-canvas></payload-canvas>
             </div>
         </div>
         <script src="vue.global.js"></script>

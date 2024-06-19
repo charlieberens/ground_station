@@ -17,8 +17,10 @@
 #define RFM95_RST 2
 #define RFM95_INT 3
 
-// Change to 434.0 or other frequency, must match RX's freq!
-#define RF95_FREQ 915.0
+// Hermes
+// #define RF95_FREQ 924.5
+// // Helios
+#define RF95_FREQ 927.5
 
 // Singleton instance of the radio driver
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
