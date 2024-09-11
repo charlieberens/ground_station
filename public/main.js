@@ -1,5 +1,4 @@
 const { createApp, ref, toRefs, watch, shallowRef } = Vue;
-const { OBJLoader, MTLLoader } = THREE;
 
 const DEFAULT_MAX_DATA_POINTS = 200;
 
@@ -114,7 +113,7 @@ const app = createApp({
                     }
                     gdata.value[source].push({ time, value });
                     if (gdata.value[source].length > pointCount.value) {
-                        gdata.value.shift();
+                        gdata.value[source].shift();
                     }
                 }
                 i++;
@@ -240,16 +239,24 @@ app.component("gps", {
     },
     setup(props) {
         const { data } = toRefs(props);
+        const formatGps = (val) => {
+            if (!val) return;
+            if (val[0] == "-") {
+                return Number(`${val.substring(0, 4)}.${val.substring(4)}`);
+            }
+            return Number(`${val.substring(0, 2)}.${val.substring(2)}`);
+        };
 
         return {
             data,
+            formatGps,
         };
     },
     template: `
         <div class="gps">
             <span :class="{'satelite-fix-indicator': true, 'fix': data.fix}"></span>
             <span class="satelite-count">{{data.satelites}} Satelites</span>
-            <span class="lat-lon">{{data.mostRecent['lat']}} {{data.mostRecent['lon']}}</span>
+            <span class="lat-lon">{{formatGps(data.mostRecent['lat'].toString())}} {{formatGps(data.mostRecent['lon'].toString())}}</span>
         </div>`,
 });
 
@@ -276,129 +283,6 @@ app.component("Log", {
             <ul>
                 <li v-for="d in data" :key="d.time"><em class="log-time">{{ d.time.toFixed(2) }}:</em><div class="log-entry-cont"><span v-for="d2 in d.value.split('\\n').filter(l => l.length)">{{d2}}</span></div></li>
             </ul>
-        </div>
-    `,
-});
-
-app.component("payload-canvas", {
-    props: {
-        data: Object,
-    },
-    setup(props) {
-        const { data } = toRefs(props);
-
-        let camera = null;
-        let container = ref(null);
-        let scene = new THREE.Scene();
-        let mesh = null;
-        let renderer = null;
-        let hermes = null;
-        let hermesGroup = null;
-        let hermesMaterial = null;
-        let light = null;
-        let pointLight = null;
-
-        const initCanvas = () => {
-            camera = new THREE.PerspectiveCamera(
-                75,
-                container.value.clientWidth / container.value.clientHeight,
-                0.1,
-                1000
-            );
-            camera.position.z = 5;
-
-            let geometry = new THREE.BoxGeometry(0.2, 0.72, 0.2);
-            let material = new THREE.MeshNormalMaterial();
-
-            const loadObjectAndAdd = (materials) => {
-                const loader = new OBJLoader();
-                materials.preload();
-                loader.setMaterials(materials);
-                loader.load(
-                    "hermes.obj",
-                    function (object) {
-                        console.log("Wumbus called");
-                        object.scale.set(10, 10, 10);
-                        hermes = object;
-
-                        hermesGroup = new THREE.Group();
-                        hermesGroup.add(hermes);
-                        hermes.position.set(0, -2, 0);
-
-                        scene.add(hermesGroup);
-                    },
-                    function (xhr) {
-                        console.log(
-                            (xhr.loaded / xhr.total) * 100 + "% loaded"
-                        );
-                    },
-                    function (error) {
-                        console.log(error);
-                        console.log("An error happened");
-                    }
-                );
-            };
-
-            // Load the payload model
-            const materialLoader = new MTLLoader();
-            materialLoader.load(
-                "hermes.mtl",
-                function (materials) {
-                    loadObjectAndAdd(materials);
-                },
-                function (xhr) {
-                    console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-                },
-                function (error) {
-                    console.log(error);
-                    console.log("An error happened");
-                }
-            );
-
-            light = new THREE.AmbientLight(0xffffff, 1);
-            // pointLight = new THREE.PointLight(0xffffff, 1);
-            // pointLight.position.set(25, 50, 25);
-            scene.add(light);
-            // scene.add(pointLight);
-
-            mesh = new THREE.Mesh(geometry, material);
-            // scene.add(mesh);
-
-            renderer = new THREE.WebGLRenderer({
-                antialias: true,
-            });
-            renderer.setSize(
-                container.value.clientWidth,
-                container.value.clientHeight
-            );
-            renderer.setClearColor(0xffffff, 1);
-            container.value.appendChild(renderer.domElement);
-        };
-
-        const animate = () => {
-            requestAnimationFrame(animate);
-            // Rotate hermes
-            if (hermesGroup) {
-                // hermes.rotation.y += 0.01;
-                hermesGroup.rotation.x += 0.01;
-                // hermes.rotation.z += 0.01;
-            }
-            renderer.render(scene, camera);
-        };
-
-        return {
-            camera,
-            container,
-            initCanvas,
-            animate,
-        };
-    },
-    mounted() {
-        this.initCanvas();
-        this.animate();
-    },
-    template: `
-        <div class="payload-canvas-container" ref="container">
         </div>
     `,
 });
