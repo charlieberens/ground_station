@@ -242,9 +242,7 @@ def main():
     parser.add_argument(
         "--baudrate", help="Baudrate", default=115200, type=int, required=False
     )
-    parser.add_argument(
-        "--test", help="Test Mode", default=False, type=bool, required=False
-    )
+    parser.add_argument("--test", help="Test Mode", action="store_true", required=False)
     parser.add_argument(
         "--debug",
         help="Prints serial data to stdout",
