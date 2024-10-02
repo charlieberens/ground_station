@@ -14,7 +14,7 @@
     <body>
         <div id="app">
             <nav v-if="port">
-                <h2 class="payload-name">{{payloadName}}</h2>
+                <h2 class="payload-name" v-if="payloadName">{{payloadName}}</h2>
                 <input
                     class="search"
                     placeholder="Search"
@@ -48,7 +48,7 @@
                     :data="gdata[source.id.toLowerCase()]"
                     v-for="source in sources.filter((s) => s.title.toLowerCase().includes(search.toLowerCase()) || s.id.toLowerCase().includes(search.toLowerCase()))"
                 ></Data-Wrapper>
-                <payload-canvas></payload-canvas>
+                <!-- <payload-canvas></payload-canvas> -->
             </div>
         </div>
         <script src="vue.global.js"></script>

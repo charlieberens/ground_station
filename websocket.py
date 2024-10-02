@@ -177,14 +177,14 @@ def extract_gridfin_data(data, time):
     ]
 
 
-PRESSURE_AT_SEA_LEVEL = 1013.25
+PRESSURE_AT_SEA_LEVEL = 861.61
 
 
 def extract_altitude_data(data, time):
     temp = float(data.split("\t")[1].split("=")[1])
     pressure = float(data.split("\t")[0].split("=")[1])
 
-    altitude = 145366.45 * (1.0 - pow(pressure / 843.89, 0.190284))
+    altitude = 145366.45 * (1.0 - pow(pressure / PRESSURE_AT_SEA_LEVEL, 0.190284))
     temp = temp * 9 / 5 + 32
 
     return [
